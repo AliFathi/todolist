@@ -7,7 +7,7 @@ import TodoItem from './components/todoItem.js';
 const app = createApp({
     setup() {
         const tasks = ref([]);
-        const loading = ref(true);
+        const loading = ref(false);
 
         return { tasks, loading };
     },
@@ -19,7 +19,10 @@ const app = createApp({
 
     methods: {
         async getItems() {
+            this.loading = true;
+            // todo: implement filtering UI to test PredicateBuilder
             this.tasks = await taskSvc.select();
+            this.loading = false;
         }
     }
 });

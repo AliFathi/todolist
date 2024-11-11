@@ -1,8 +1,12 @@
-﻿export class PredicateBuilder<TData> {
+﻿/** برای ساختن فیلتر‌هایی شبیه
+ * LINQ */
+export class PredicateBuilder<TData> {
     _funcs: ((d: TData) => boolean)[] = [];
 
     and(predicate: (d: TData) => boolean) {
         this._funcs.push(predicate);
+        // allow chaining.
+        return this;
     }
 
     build() {

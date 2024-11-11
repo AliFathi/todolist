@@ -29,4 +29,5 @@ class TaskService {
     }
 }
 
+// در کل برنامه، یه دونه اینستنس کافیه
 export default new TaskService();

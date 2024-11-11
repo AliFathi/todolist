@@ -21,6 +21,8 @@ export class Task {
         this.createdAt = Date.now();
     }
 
+    /** اگر این متد نباشه،
+     *  پراپرتی آی‌دی رو در خروجی جیسون نشون نمیده */
     toJSON() {
         return {
             id: this.id,
