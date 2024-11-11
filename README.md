@@ -2,12 +2,14 @@
 Fullstack Developer Practical Exam for AbrNOC
 
 ### How to Run?
-1- install dependencies: `npm i`
+1- Install dependencies: `npm i`.
 
-2- build typescript files: `npm run build`
+2- Build typescript files: `npm run build`.
 
-3- start the app: `npm run start`
+I was working on Windows, so `prebuild` script is using PowesShell. to build on Linux open `package.json` file and replce `@powershell rm -r -force ./dist` with `rm -rf ./dist`.
 
-by default, app will start listening on port 3000. you can set port in evnironment by PORT key.
+3- Start the app: `npm run start`.
 
-4- make fun :)
+By default, app will start listening on port 3000. you can set port in evnironment by PORT key.
+
+4- Make fun :)
