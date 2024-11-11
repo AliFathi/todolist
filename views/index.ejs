@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <%- include('./_head', { title: 'home' }); %>
+  <style>
+    #app-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: radial-gradient(circle at top left,transparent 9%, #353444 10%,#353444 15%, transparent 16%), radial-gradient(circle at bottom left,transparent 9%, #353444 10%,#353444 15%, transparent 16%), radial-gradient(circle at top right,transparent 9%, #353444 10%,#353444 15%, transparent 16%), radial-gradient(circle at bottom right,transparent 9%, #353444 10%,#353444 15%, transparent 16%),radial-gradient(circle, transparent 25%, #212529 26%),linear-gradient(45deg, transparent 46%, #353444 47%, #353444 52%, transparent 53%), linear-gradient(135deg, transparent 46%, #353444 47%, #353444 52%, transparent 53%);
+      background-size: 4em 4em;
+      background-color: #212529;
+      opacity: 1
+    }
+
+    .ui-disabled {
+      opacity: .7;
+      pointer-events: none;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .todo-item-wrap {
+      background-color: #1b1f22;
+    }
+
+    .todo-item-actions {
+      display: flex;
+      justify-content: end;
+    }
+
+    .todo-item-state {
+      margin: 5px;
+    }
+  </style>
+
+</head>
+<body id="app">
+  <main class="container">
+    <section class="row justify-content-center">
+      <div id="app-wrap" class="col-lg-5 col-md-8 col-sm-12 py-2">
+        <ul class="list-group p-0">
+          <li v-for="item in tasks" class="card todo-item-wrap mb-3 p-2">
+            <todo-item :item="item"></todo-item>
+          </li>
+        </ul>
+
+        <div class="card todo-item-wrap mt-3 p-2">
+          <todo-form></todo-form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js" type="module"></script>
+
+  <!-- Templates of Components -->
+
+  <script id="todo-form-template" type="text/x-handlebars-template">
+    <form :class="{ 'ui-disabled': loading, 'todo-item':true }" @submit.prevent="submit">
+      <div class="todo-item-text">
+        <input v-model="text" type="text" class="form-control" placeholder="what are you to do now?" autofocus>
+      </div>
+      <div class="todo-item-actions p-2 pb-0">
+        <div class="todo-item-state">
+          <button type="submit" class="btn btn-sm btn-success" :disabled="text.length == 0 || loading">
+            {{ loading ? 'saving ...' : 'add' }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </script>
+
+  <script id="todo-item-template" type="text/x-handlebars-template">
+    <div :class="{ 'ui-disabled': loading, 'todo-item': true }">
+      <div class="todo-item-text">
+        <input v-model="item.text" type="text" class="form-control" @change="setText">
+      </div>
+      <div class="todo-item-actions p-2 pb-0">
+        <div class="todo-item-state">
+          <button type="button"
+                  class="btn btn-sm btn-secondary"
+                  :disabled="item.status == 1"
+                  @click="setStatus(1)">
+            todo
+          </button>
+        </div>
+        <div class="todo-item-state">
+          <button type="button"
+                  class="btn btn-sm btn-secondary"
+                  :disabled="item.status == 2"
+                  @click="setStatus(2)">
+            doing
+          </button>
+        </div>
+        <div class="todo-item-state">
+          <button type="button"
+                  class="btn btn-sm btn-success"
+                  :disabled="item.status == 3"
+                  @click="setStatus(3)">
+            done
+          </button>
+        </div>
+        <div class="todo-item-state">
+          <button type="button"
+                  class="btn btn-sm btn-danger"
+                  @click="remove()">
+            remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </script>
+</body>
+</html>
