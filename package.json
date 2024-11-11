@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "todolist",
   "version": "1.0.0",
   "private": true,
@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc --build",
-    "prebuild": "@powershell rm -r ./dist/*; cp -r ./views, ./public ./dist/;",
+    "prebuild": "@powershell rm -r -force ./dist; mkdir ./dist; cp -r ./views, ./public ./dist/;",
     "postbuild": "echo 'build completed'"
   },
   "author": "AliFathi",
